@@ -12,7 +12,9 @@
 
 const SPELEN = 1;
 const GAMEOVER = 2;
+const LEFT_ARROW = 37;
 var spelStatus = SPELEN;
+
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
@@ -25,12 +27,18 @@ var spelerY = 600; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function () {
-  if keyIsDown
+
   // vijand
 
   // kogel
 
   // speler
+  if (keyIsDown(LEFT_ARROW)) {
+    spelerX = spelerX - 5;
+  }
+ if (keyIsDown(RIGHT_ARROW)) {
+   spelerX = spelerX + 5;
+ }
 
 };
 
@@ -44,6 +52,8 @@ var verwerkBotsing = function () {
 
   // botsing kogel tegen vijand
 
+  // botsing muur
+  
 };
 
 /**
@@ -51,16 +61,20 @@ var verwerkBotsing = function () {
  */
 var tekenAlles = function () {
   // achtergrond
-
+  background("blue");
   // vijand
 
   // kogel
 
   // speler
   fill("white");
+  rect(spelerX - 12, spelerY - 5, 25, 50);
+  fill("white");
   rect(spelerX - 25, spelerY - 25, 50, 50);
   fill("black");
   ellipse(spelerX, spelerY, 10, 10);
+
+
 
   // punten en health
 
