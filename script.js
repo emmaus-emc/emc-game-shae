@@ -25,6 +25,7 @@ var spelerY = 600; // y-positie van speler
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function () {
+  if keyIsDown
   // vijand
 
   // kogel
