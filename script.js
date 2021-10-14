@@ -38,8 +38,13 @@ var beweegAlles = function () {
   }
  if (keyIsDown(RIGHT_ARROW)) {
    spelerX = spelerX + 5;
+   }
+ if (keyIsDown(UP_ARROW)) {
+   spelerY = spelerY + -5;
  }
-
+ if (keyIsDown(DOWN_ARROW)) {
+   spelerY = spelerY + 5;
+ }
 };
 
 /**
@@ -53,7 +58,8 @@ var verwerkBotsing = function () {
   // botsing kogel tegen vijand
 
   // botsing muur
-  
+
+
 };
 
 /**
