@@ -20,6 +20,7 @@ var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var vijandX = 500;
 var vijandY = 0;
+var hp = 100;
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -69,14 +70,15 @@ var verwerkBotsing = function () {
     spelerY = spelerY + 5;
   }
   // botsing speler tegen vijand
-
+  if (vijandY-spelerY>-50&&vijandX-spelerX>-50&&vijandX-spelerX<50&&vijandY-spelerY>50){
+    console.log("botsing")
+  }
   // botsing kogel tegen vijand
 
   // botsing vijand muur
 if (vijandY >= 720) {
   vijandY = 0;
 };
-  
   
 
 
@@ -107,7 +109,8 @@ var tekenAlles = function () {
 
 
   // punten en health
-
+  
+ 
 };
 
 /**
