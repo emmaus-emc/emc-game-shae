@@ -20,7 +20,9 @@ var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 var vijandX = 500;
 var vijandY = 0;
-var hp = 100;
+var hp = 10;
+var punten = 0;
+let s = 0;
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -72,7 +74,9 @@ var verwerkBotsing = function () {
   // botsing speler tegen vijand
   if (vijandY-spelerY>-50&&vijandX-spelerX>-50&&vijandX-spelerX<50&&vijandY-spelerY>50){
     console.log("botsing")
+    hp = hp-1;
   }
+
   // botsing kogel tegen vijand
 
   // botsing vijand muur
@@ -109,7 +113,10 @@ var tekenAlles = function () {
 
 
   // punten en health
-  
+  textSize(90);
+  text(hp, 50, 100);
+  punten = punten +1/50;
+  text('punten: \n' + floor(punten), 900, 80);
  
 };
 
@@ -118,8 +125,15 @@ var tekenAlles = function () {
  * anders return false
  */
 var checkGameOver = function () {
-  return false;
+  if (hp==0){
+    return true;
+  }
+
+return false;
 };
+
+  
+
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -154,6 +168,6 @@ function draw() {
   }
   if (spelStatus === GAMEOVER) {
     // teken game-over scherm
-
+    background("black")
   }
 }
