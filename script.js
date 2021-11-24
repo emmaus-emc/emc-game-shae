@@ -18,9 +18,9 @@ var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var vijandX = 500;
+var vijandX = 200;
 var vijandY = 0;
-var hp = 10;
+var hp = 50;
 var punten = 0;
 let s = 0;
 /* ********************************************* */
@@ -95,11 +95,12 @@ if (vijandY >= 720) {
 var tekenAlles = function () {
   // achtergrond
   background("green");
-  // vijand
-  fill("red");
-  rect(vijandX-25, vijandY-25, 50, 50);
-  fill("black");
-  ellipse(vijandX,vijandY,10,10);
+  // vijand 1
+  for(var i=0;i<6;i=i+1)
+  {fill("red");
+  rect(vijandX+i*200, vijandY, 50, 50);}
+  
+
   // kogel
 
   // speler
@@ -167,7 +168,11 @@ function draw() {
     }
   }
   if (spelStatus === GAMEOVER) {
-    // teken game-over scherm
+    // teken game-over scherm\
     background("black")
+    fill("red");
+    text('GAMEOVER', 370, 300);
+    fill("red");
+    text('score:'+ floor(punten), 470, 500);
   }
 }
