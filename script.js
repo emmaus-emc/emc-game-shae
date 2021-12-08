@@ -16,13 +16,17 @@ const LEFT_ARROW = 37;
 var spelStatus = SPELEN;
 
 
+
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
-var vijandX = 200;
+var vijandX = [200, 360, 512, 643, 766, 890, 917, 1000];
 var vijandY = 0;
 var hp = 50;
 var punten = 0;
 let s = 0;
+var kogelX = 600;
+var kogelY = 600;
+var SPACE = 32;
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -33,23 +37,29 @@ let s = 0;
 var beweegAlles = function () {
 
   // vijand
- vijandY = vijandY +10;
+  vijandY = vijandY + 10;
 
   // kogel
+  if (keyIsDown(SPACE)) {
+    kogelX = spelerX;
+    kogelY = spelerY - 50;
+  }
+  kogelY = kogelY - 8;
 
   // speler
   if (keyIsDown(LEFT_ARROW)) {
     spelerX = spelerX - 5;
   }
- if (keyIsDown(RIGHT_ARROW)) {
-   spelerX = spelerX + 5;
-   }
- if (keyIsDown(UP_ARROW)) {
-   spelerY = spelerY + -5;
- }
- if (keyIsDown(DOWN_ARROW)) {
-   spelerY = spelerY + 5;
- }
+
+  if (keyIsDown(RIGHT_ARROW)) {
+    spelerX = spelerX + 5;
+  }
+  if (keyIsDown(UP_ARROW)) {
+    spelerY = spelerY + -5;
+  }
+  if (keyIsDown(DOWN_ARROW)) {
+    spelerY = spelerY + 5;
+  }
 };
 
 /**
@@ -72,22 +82,22 @@ var verwerkBotsing = function () {
     spelerY = spelerY + 5;
   }
   // botsing speler tegen vijand
-  if (vijandY-spelerY>-50&&vijandX-spelerX>-50&&vijandX-spelerX<50&&vijandY-spelerY>50){
+  for (var i = 0; i < 8; i = i + 1) {
+    if (vijandY - spelerY > -50 && vijandX[i] - spelerX > -50 && vijandX[i] - spelerX < 50 && vijandY - spelerY > 50) {
+      console.log("botsing")
+      hp = hp - 1;
+    }
+  };
+  // botsing kogel tegen vijand
+  if (kogelX == vijandX) {
     console.log("botsing")
-    hp = hp-1;
   }
 
-  // botsing kogel tegen vijand
-
   // botsing vijand muur
-if (vijandY >= 720) {
-  vijandY = 0;
-};
-  
-
-
-
-};
+  if (vijandY >= 720) {
+    vijandY = 0;
+  };
+}
 
 /**
  * Tekent spelscherm
@@ -96,12 +106,16 @@ var tekenAlles = function () {
   // achtergrond
   background("green");
   // vijand 1
-  for(var i=0;i<6;i=i+1)
-  {fill("red");
-  rect(vijandX+i*200, vijandY, 50, 50);}
-  
+  for (var i = 0; i < 8; i = i + 1) {
+    fill("red");
+    rect(vijandX[i], vijandY, 50, 50);
+  }
+
+
 
   // kogel
+  fill("black");
+  ellipse(kogelX, kogelY, 50, 50);
 
   // speler
   fill("white");
@@ -116,9 +130,9 @@ var tekenAlles = function () {
   // punten en health
   textSize(90);
   text(hp, 50, 100);
-  punten = punten +1/50;
+  punten = punten + 1 / 50;
   text('punten: \n' + floor(punten), 900, 80);
- 
+
 };
 
 /**
@@ -126,14 +140,14 @@ var tekenAlles = function () {
  * anders return false
  */
 var checkGameOver = function () {
-  if (hp==0){
+  if (hp == 0) {
     return true;
   }
 
-return false;
+  return false;
 };
 
-  
+
 
 
 /* ********************************************* */
@@ -173,6 +187,6 @@ function draw() {
     fill("red");
     text('GAMEOVER', 370, 300);
     fill("red");
-    text('score:'+ floor(punten), 470, 500);
+    text('score:' + floor(punten), 470, 500);
   }
 }
